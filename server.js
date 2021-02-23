@@ -21,9 +21,9 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema)
 
-// const defaultEndpoint = (_, res) => {
-//     res.status(404).end()
-// }
+const defaultEndpoint = (_, res) => {
+    res.status(404).send('Not found')
+}
 
 const server = express()
 server.use(express.json())
@@ -55,7 +55,7 @@ server.post('/register', (req, res) => {
                 }
             })
         }
-        })
+    })
 })
 
 server.post('/login', (req, res) => {
@@ -63,46 +63,27 @@ server.post('/login', (req, res) => {
     .then(result => {
         res.json(result)
     })
-    // const loginUser = users.find(user => user.username === req.body.username && user.password === req.body.password)
-
-    // loginUser ? res.json(loginUser) : res.json(null)
 })
 
-server.delete('/users/:id', (req, res) => {
-    const userId = req.params.id
-    users = [...users.filter(user => user.id != userId)]
-    res.satus(200).end()
+server.delete('/users', (req, res) => {
+    User.deleteOne({_id: req.body._id}).then(result => {
+        res.json(result.deletedCount) // if deleted returns 1
+    })
 })
 
 server.patch('/users', (req, res) => {
-    const user = users.find(user => user.username === req.body.username)
-    user.score.played++
-    if (req.body.didWin) {
-        user.score.won++
-        res.json(user.score.won)
-    }
-    else {
-        user.score.lost++
-        res.json(user.score.lost)
-    }
+    const user = req.body.user
+    const didWin = req.body.didWin
+    User.findOne({_id: user._id}).then(result => {
+        result.score.played++
+        didWin ? result.score.won++ : result.score.lost++
+
+        result.save()
+        res.json(result)
+    })
 })
 
-//defaultEndpoint
+server.use(defaultEndpoint)
 
 const PORT = 3001
 server.listen(PORT, () => console.log(`Server is running at: http://localhost:${PORT}`))
-
-// function isValid(request) {
-//     // User.findOne({username: request.username})
-//     //     .then(result => {
-//     //         if (result) return -1
-//     //     }).then(() => {
-//     //         User.findOne({email: request.email}).then(result => {
-//     //             if (result) return -2
-//     //             return true
-//     //         })
-//     //     })
-//     // if (User.findOne({username: request.username})) return -1
-//     // if (User.findOne({email: request.email})) return -2
-//     // return true
-// }
