@@ -1,0 +1,37 @@
+GET http://localhost:3001/users
+
+###
+POST http://localhost:3001/register
+Content-type: application/json
+
+{
+    "firstName": "Pera",
+    "lastName": "Peric",
+    "username": "peraperic",
+    "email": "pera.peric@gmail.com",
+    "password": "fdsa4321"
+}
+
+###
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+    "username": "peraperic",
+    "password": "fdsa4321"
+}
+
+###
+PATCH http://localhost:3001/users
+Content-Type: application/json
+
+{
+    "username": "peraperic",
+    "didWin": false
+}
+
+###
+DELETE http://localhost:3001/users/0
+
+###
+GET http://localhost:3001/asd
