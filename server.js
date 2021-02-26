@@ -2,8 +2,10 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+dotenv.config()
 
-const url = 'mongodb+srv://petarlecic:EMGkLhc0ci2Epc8p@cluster0.yhahu.mongodb.net/Connect4?retryWrites=true&w=majority'
+const url = process.env.MONGODB_URI
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 const userSchema = new mongoose.Schema({
