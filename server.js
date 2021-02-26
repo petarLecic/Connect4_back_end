@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     lastName: String,
     username: String,
     email: String,
-    password: String,
+    pass: String,
     score: {
         played: Number,
         won: Number,
@@ -61,7 +61,7 @@ server.post('/register', (req, res) => {
 })
 
 server.post('/login', (req, res) => {
-    User.findOne({$and: [{username: req.body.username}, {password: req.body.password}]})
+    User.findOne({$and: [{username: req.body.username}, {pass: req.body.pass}]})
     .then(result => {
         res.json(result)
     })
