@@ -31,9 +31,10 @@ server.use(morgan('dev'))
 server.use(cors())
 
 server.get('/users', (_, res) => {
-    User.find({}).then(result => {
-        res.json(result)
-    })
+    // User.find({}).then(result => {
+    //     res.json(result)
+    // })
+    res.json('sada')
 })
 
 server.post('/register', (req, res) => {
