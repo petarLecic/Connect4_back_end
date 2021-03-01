@@ -5,8 +5,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const url = process.env.MONGODB_URI
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 const userSchema = new mongoose.Schema({
     username: String,
@@ -31,10 +30,10 @@ server.use(morgan('dev'))
 server.use(cors())
 
 server.get('/users', (_, res) => {
-    // User.find({}).then(result => {
-    //     res.json(result)
-    // })
-    res.json('sada')
+    User.find({}).then(result => {
+        console.log(result)
+        res.json(result)
+    })
 })
 
 server.post('/register', (req, res) => {
