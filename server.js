@@ -85,5 +85,5 @@ server.patch('/users', (req, res) => {
 
 server.use(defaultEndpoint)
 
-const PORT = 3001
-server.listen(PORT, () => console.log(`Server is running at: http://localhost:${PORT}`))
+const PORT = process.env.PORT
+server.listen(PORT, () => console.log(`Server is running at: ${PORT}`))
