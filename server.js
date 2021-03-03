@@ -31,7 +31,6 @@ server.use(cors())
 
 server.get('/users', (_, res) => {
     User.find({}).then(result => {
-        console.log(result)
         res.json(result)
     })
 })
@@ -87,18 +86,3 @@ server.use(defaultEndpoint)
 
 const PORT = process.env.PORT
 server.listen(PORT, () => console.log(`Server is running at: ${PORT}`))
-
-// import express from 'express'
-// import cors from 'cors'
-// import dotenv from 'dotenv'
-// dotenv.config()
-// const server = express()
-// server.use(express.json())
-// server.use(cors())
-
-// server.get('/users', (req, res) => {
-//     res.json({txt: 'Sve radi'})
-// })
-
-// const PORT = process.env.PORT
-// server.listen(PORT, () => console.log(`Server is running at: ${PORT}`))
