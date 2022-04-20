@@ -44,4 +44,4 @@ NOTE: This is the back end (server) for Connect4 project, if you want to install
 https://github.com/petarLecic/Connect4_front_end
 
 ## Play the game at:
-https://github.com
+https://petarlecic.github.io/Connect4_front_end/
